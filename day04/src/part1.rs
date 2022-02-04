@@ -37,8 +37,17 @@ fn create_bingo_grid(lines: Vec<&str>) -> BingoGrid {
         }
         line_num += 1
     }
-    BingoGrid {
+    let mut bingo_grid = BingoGrid {
         grid: hashmap_under_construction,
+    };
+    bingo_grid
+}
+
+#[allow(dead_code)]
+impl BingoGrid {
+    fn check_a_number(&mut self, picked_number: usize) {
+        let key = &self.grid.iter().find_map(|(key, val)| if val.value == picked_number { Some(key) } else { None });
+        &mut self.grid.get_mut(key.unwrap()).unwrap().status = BoxStatus::Checked;
     }
 }
 
@@ -50,6 +59,12 @@ fn main() {
 
     let picked_values: Vec<usize> = lines[0].split(",").map(|x| str::parse::<usize>(x).unwrap()).collect();
     println!("{:?}", picked_values);
+    let bingo_grid_1 = create_bingo_grid(lines[2..7].to_vec());
+    let bingo_grid_2 = create_bingo_grid(lines[8..13].to_vec());
+    let bingo_grid_3 = create_bingo_grid(lines[14..19].to_vec());
 
-    println!("{:?}", create_bingo_grid(lines[2..7].to_vec()));
+    println!("{:?}", bingo_grid_1);
+    println!("{:?}", bingo_grid_2);
+    println!("{:?}", bingo_grid_3);
+
 }
