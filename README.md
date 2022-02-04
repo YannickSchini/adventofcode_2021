@@ -7,5 +7,7 @@ For reference, I only know Python and I have absolutely no experience with typed
 
 # What I learned
 
-- Day 1: Use of `cargo`, a rust project’s structure, the `cargo.toml` file and the `[[bin]]` keyword
+- Day 1: Use of `cargo`, a rust project’s structure, the `cargo.toml` file and the `[[bin]]` keyword.
 - Day 2: The difference between a `String` and a `str`, the `option` type and the `unwrap()` method, a first try at simple pattern matching and string splitting with `lines()` and `split_whitespace()` methods.
+- Day 3: First brush with the borrow checker and lifetimes, the definition of function with the `fn` keyword, use of `Vec<&str>`.
+- Day 4: Creation of custom `structs`, `enums` and `HashMaps`.
