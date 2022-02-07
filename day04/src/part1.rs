@@ -4,6 +4,7 @@ use std::str;
 use std::collections::HashMap;
 
 #[derive(Debug)]
+#[derive(PartialEq)]
 enum BoxStatus {
     Checked,
     Unchecked,
@@ -34,6 +35,26 @@ impl BingoGrid {
         // let key = &self.grid.iter().find_map(|(key, val)| if val.value == picked_number { Some(key) } else { None });
         let key = find_key_for_value(&self.grid, picked_number);
         self.grid.get_mut(&key.unwrap()).unwrap().check_grid_element()
+    }
+
+    fn has_grid_won(&self) -> bool {
+        'cols: for index_i in 0..GRID_WIDTH {
+            for index_j in 0..GRID_LENGTH {
+                if self.grid.get(&(index_j, index_i)).unwrap().status == BoxStatus::Unchecked {
+                    continue 'cols;
+                }
+            }
+            return true;
+        }
+        'lines: for index_i in 0..GRID_WIDTH {
+            for index_j in 0..GRID_LENGTH {
+                if self.grid.get(&(index_i, index_j)).unwrap().status == BoxStatus::Unchecked {
+                    continue 'lines;
+                }
+            }
+            return true;
+        }
+        false
     }
 }
 
@@ -81,6 +102,11 @@ fn main() {
     }
     let mut test_bingo_grid = create_bingo_grid(lines[2..7].to_vec());
     println!("{:?}",  test_bingo_grid);
+    println!("{}", test_bingo_grid.has_grid_won());
     test_bingo_grid.check_a_number(22);
-    println!("{:?}",  test_bingo_grid);
+    test_bingo_grid.check_a_number(13);
+    test_bingo_grid.check_a_number(17);
+    test_bingo_grid.check_a_number(11);
+    test_bingo_grid.check_a_number(0);
+    println!("{}", test_bingo_grid.has_grid_won());
 }
