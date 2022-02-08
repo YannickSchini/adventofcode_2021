@@ -56,6 +56,16 @@ impl BingoGrid {
         }
         false
     }
+
+    fn calculate_sum_of_unmarked(&self) -> usize {
+        let mut sum = 0usize;
+        for (_, grid_element) in self.grid.iter() {
+            if grid_element.status == BoxStatus::Unchecked {
+                sum += grid_element.value;
+            }
+        }
+        sum
+    }
 }
 
 fn create_bingo_grid(lines: Vec<&str>) -> BingoGrid {
@@ -100,13 +110,21 @@ fn main() {
     for bingo in &bingo_grids {
         println!("{:?}", bingo);
     }
-    let mut test_bingo_grid = create_bingo_grid(lines[2..7].to_vec());
+    let mut test_bingo_grid = create_bingo_grid(lines[14..19].to_vec());
     println!("{:?}",  test_bingo_grid);
     println!("{}", test_bingo_grid.has_grid_won());
-    test_bingo_grid.check_a_number(22);
-    test_bingo_grid.check_a_number(13);
-    test_bingo_grid.check_a_number(17);
+    test_bingo_grid.check_a_number(7);
+    test_bingo_grid.check_a_number(4);
+    test_bingo_grid.check_a_number(9);
+    test_bingo_grid.check_a_number(5);
     test_bingo_grid.check_a_number(11);
+    test_bingo_grid.check_a_number(17);
+    test_bingo_grid.check_a_number(23);
+    test_bingo_grid.check_a_number(2);
     test_bingo_grid.check_a_number(0);
+    test_bingo_grid.check_a_number(14);
+    test_bingo_grid.check_a_number(21);
+    test_bingo_grid.check_a_number(24);
     println!("{}", test_bingo_grid.has_grid_won());
+    println!("{}", test_bingo_grid.calculate_sum_of_unmarked());
 }
