@@ -30,7 +30,10 @@ impl BingoGrid {
     pub fn check_a_number(&mut self, picked_number: usize) {
         // let key = &self.grid.iter().find_map(|(key, val)| if val.value == picked_number { Some(key) } else { None });
         let key = crate::find_key_for_value(&self.grid, picked_number);
-        self.grid.get_mut(&key.unwrap()).unwrap().check_grid_element()
+        match key {
+            None => (),
+            _ => self.grid.get_mut(&key.unwrap()).unwrap().check_grid_element()
+        }
     }
 
     pub fn has_grid_won(&self) -> bool {
