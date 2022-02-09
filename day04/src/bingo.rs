@@ -10,6 +10,7 @@ pub enum BoxStatus {
 }
 
 #[derive(Debug)]
+#[derive(PartialEq)]
 pub struct GridElement {
     pub status: BoxStatus,
     pub value: usize
@@ -22,6 +23,7 @@ impl GridElement {
 }
 
 #[derive(Debug)]
+#[derive(PartialEq)]
 pub struct BingoGrid {
     pub grid: HashMap<(usize, usize), GridElement>
 }
