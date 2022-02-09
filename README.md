@@ -10,4 +10,4 @@ For reference, I only know Python and I have absolutely no experience with typed
 - Day 1: Use of `cargo`, a rust project’s structure, the `cargo.toml` file and the `[[bin]]` keyword.
 - Day 2: The difference between a `String` and a `str`, the `option` type and the `unwrap()` method, a first try at simple pattern matching and string splitting with `lines()` and `split_whitespace()` methods.
 - Day 3: First brush with the borrow checker and lifetimes, the definition of function with the `fn` keyword, use of `Vec<&str>`.
-- Day 4: Creation of custom `structs`, `enums` and `HashMaps`.
+- Day 4: Using `HashMaps`, the creation of custom `structs`, `const` and `enums`, using the `impl` and `pub` keywords, `#[derive(PartialEq)]`, `break` and `continue` statements can be scoped to target outer loops, separating code in different files and using `crate::` and `mod`, using a constructor to initiate members of our structs, the `retain` method for vectors, dereferencing a value with `*`.
