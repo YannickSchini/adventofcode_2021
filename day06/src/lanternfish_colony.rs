@@ -12,24 +12,28 @@ impl FromStr for LanternfishColony {
     type Err = ParseIntError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let mut map: HashMap<usize, usize> = HashMap::new();
+        let mut population: HashMap<usize, usize> = HashMap::with_capacity(9);
         for fish in s.split(",") {
-            let number = map.entry(fish.parse::<usize>().unwrap()).or_insert(0);
-            *number += 1;
+            let fish_of_a_given_age = population.entry(fish.parse::<usize>().unwrap()).or_insert(0);
+            *fish_of_a_given_age += 1;
         }
-        Ok(LanternfishColony { population: map })
+        Ok(LanternfishColony { population })
     }
 }
 
 impl LanternfishColony {
     pub fn evolve_pop_by_one_day(self) -> LanternfishColony {
-        let mut temp: HashMap<usize, usize> = HashMap::new();
-        for key in (1..8).rev() {
-            temp.insert(key-1, *self.population.get(&key).unwrap());
+        let mut new_pop: HashMap<usize, usize> = HashMap::with_capacity(9);
+        for key in (0..8).rev() {
+            new_pop.insert(key, *self.population.get(&(key+1)).unwrap_or(&0));
         }
-        temp.insert(8, *self.population.get(&0).unwrap());
-        *temp.get_mut(&6).unwrap() += self.population.get(&0).unwrap();
+        new_pop.insert(8, *self.population.get(&0).unwrap_or(&0));
+        *new_pop.get_mut(&6).unwrap_or(&mut 0) += self.population.get(&0).unwrap_or(&0);
         
-        return LanternfishColony { population: temp };
+        return LanternfishColony { population: new_pop };
+    }
+
+    pub fn get_size_of_population(self) -> usize {
+        self.population.into_values().sum()
     }
 }
