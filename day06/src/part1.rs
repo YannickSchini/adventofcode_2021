@@ -13,7 +13,7 @@ fn main() {
     let input: &str = contents.lines().collect::<Vec<&str>>()[0];
 
     let mut fish_colony: LanternfishColony = LanternfishColony::from_str(&input).unwrap();
-    for day in 1..81 {
+    for day in 1..257 {
         println!("Fish colony at day {}: {:?}", day, fish_colony);
         fish_colony = fish_colony.evolve_pop_by_one_day()
     }
